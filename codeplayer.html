@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Code Player</title>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script src="jquery-ui/jquery-ui.js"></script>
+        <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+        
+        
+        <style type="text/css">
+        
+            body {
+                font-family: sans-serif;
+                margin: 0;
+                padding: 0; 
+            }
+            
+            #header {
+                background-image: linear-gradient(to left, #525252, black);
+                width: 100%;
+                padding: 5px;
+                height: 30px;
+                border-bottom: 1px solid black;
+                
+            }
+            
+            #buttonContainer {
+                width: 230px;
+                margin: 0 auto;
+            }
+            
+            .toggleBtn {
+                float: left;
+                border: 1px solid black;
+                padding: 6px;
+                border-right: none;
+                font-size: 90%;
+                background-color: white;
+                transition: all .2s;
+            }
+            
+            #html {
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+            }
+            
+            #output {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+            
+            #logo {
+                float: left;
+                font-size: 120%;
+                font-weight: bold;
+                padding: 3px 5px;
+                color: white;
+            }
+            
+            .active-html {
+                background-color: #E96228;
+                color: white;
+            }
+            
+            .active-css {
+                background-color: #2760E6;
+                color: white;
+            }
+            
+            .active-js {
+                background-color: #F3CF01; 
+                color: white;
+            }
+            
+            .active-output {
+                background-color: lightcoral;
+                color: white;
+            }
+            
+            .highlighted {
+                background-color: #d6d6d6;
+                color: black;
+            }
+            
+            textarea {
+                resize: none;
+                border-top: none;
+                border-color: #aaaaaa;  
+            }
+            
+            .panel {
+                float: left;
+                width: 50%;
+                
+            }
+            
+            iframe {
+                border: none;
+                border-bottom: 1px solid #aaaaaa;
+                padding-left: 8px;
+                padding-bottom: 3.5px;
+            }
+            
+            .hidden {
+                display: none;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        
+        <div id="header">
+            
+            <div id="logo">
+                
+                CodePlayer
+            
+            </div>
+            
+            <div id="buttonContainer">
+            
+                <div class="toggleBtn active-html" id="html">HTML</div>    
+                
+                <div class="toggleBtn" id="css">CSS</div>    
+                
+                <div class="toggleBtn" id="js">Javascript</div>    
+                
+                <div class="toggleBtn active-output" id="output">Output</div>    
+            
+            </div>
+        
+        </div>
+        
+        <div id="bodyContainer">
+            
+            <textarea id="htmlPanel" class="panel"><p id="paragraph">Hello World!</p></textarea>
+            
+            <textarea id="cssPanel" class="panel hidden">p { color: green; }</textarea>
+            
+            <textarea id="jsPanel" class="panel hidden">document.getElementById("paragraph").innerHTML = "Hello!";</textarea>
+        
+            <iframe id="outputPanel" class="panel"></iframe>
+        
+        </div>
+        
+        <script type="text/javascript">
+            
+            function updateOutput() {
+                $("iframe").contents().find("html").html("<html><head><style type='text/css'>" + $("#cssPanel").val() + "</style></head><body>" + $("#htmlPanel").val() + "</body></html>");
+                
+                document.getElementById("outputPanel").contentWindow.eval($("#jsPanel").val());
+                
+            }
+            
+            
+            $(".toggleBtn").hover(function() {
+                
+                $(this).addClass("highlighted");
+                
+            },  function() {
+                
+                $(this).removeClass("highlighted");
+                
+            });
+            
+            $(".toggleBtn").click(function() {
+                 
+                $(this).toggleClass("active-" + $(this).attr("id"));
+                
+                $(this).removeClass("highlighted");
+                
+                var panelID = $(this).attr("id") + "Panel";
+                
+                $("#" + panelID).toggleClass("hidden");
+                
+                var numOfActivePanels = 4 - $(".hidden").length;
+                
+                $(".panel").width(($(window).width()/numOfActivePanels) - 10);
+                
+            });
+          
+            $(".panel").height($(window).height() - $("#header").height() - 18);
+            
+            $(".panel").width(($(window).width()/2) - 10);
+            
+            updateOutput();
+            
+            $("textarea").on('change keyup paste', function() {
+                
+                updateOutput();
+                
+            })
+            
+        </script>
+
+    </body>
+
+</html>
