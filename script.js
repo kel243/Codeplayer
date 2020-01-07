@@ -41,7 +41,7 @@ $(".toggleBtn").click(function() {
 
     var numOfActivePanels = 4 - $(".hidden").length;
 
-    var percentage = 100 / numOfActivePanels - 1;
+    var percentage = 100 / numOfActivePanels - .5;
     $(".panel").width(`${percentage}%`);
 
 });

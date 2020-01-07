@@ -18,6 +18,10 @@ body {
     margin: 0 auto;
 }
 
+#bodyContainer {
+    padding: 2px;
+}
+
 .toggleBtn {
     float: left;
     border: 1px solid black;
@@ -85,6 +89,7 @@ textarea {
 
 iframe {
     border: none;
+    float: left;
     border-bottom: 1px solid #aaaaaa;
     padding-left: 8px;
     padding-bottom: 3.5px;
