@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Code Player</title>
+        <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        
+        <div id="header">
+            
+            <div id="logo">
+                
+                CodePlayer
+            
+            </div>
+            
+            <div id="buttonContainer">
+            
+                <div class="toggleBtn active-html" id="html">HTML</div>    
+                
+                <div class="toggleBtn" id="css">CSS</div>    
+                
+                <div class="toggleBtn" id="js">Javascript</div>    
+                
+                <div class="toggleBtn active-output" id="output">Output</div>    
+            
+            </div>
+            
+            <button class="clearBtn">Clear</button>
+        
+        </div>
+        
+        <div id="bodyContainer">
+            
+            <textarea id="htmlPanel" class="panel"><p id="paragraph">Hello World!</p></textarea>
+            
+            <textarea id="cssPanel" class="panel hidden">p { color: green; }</textarea>
+            
+            <textarea id="jsPanel" class="panel hidden">document.getElementById("paragraph").innerHTML = "Hello!";</textarea>
+        
+            <iframe id="outputPanel" class="panel"></iframe>
+        
+        </div>
+        
+        <script src="script.js"></script>
+
+    </body>
+
+</html>
